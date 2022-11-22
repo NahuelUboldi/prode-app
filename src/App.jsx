@@ -2,37 +2,31 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 function App() {
-  // useEffect(() => {
-  //   fetch('https://pnkwnu.deta.dev/prode/standings', {
-  //     mode: 'no-cors', // no-cors, *cors, same-origin
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Access-Control-Allow-Origin': '*',
-  //     },
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => console.log(data));
-  // }, []);
+  const [results, setResults] = useState([]);
 
-  const fetchPositions = () => {
-    const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
+  const parseResults = () => {
+    results.map((match) => {
+      if (match.status === 'completed') {
+        const homeTeam = match.homeTeam.name;
+        const homeTeamGoals = match.homeTeam.goals;
+        const awayTeam = match.awayTeam.name;
+        const awayTeamGoals = match.awayTeam.goals;
 
-    const yourUrl = 'pnkwnu.deta.dev/prode/standings';
+        console.log(homeTeam, homeTeamGoals, awayTeamGoals, awayTeam);
+      }
+    });
+  };
 
-    fetch(corsAnywhere + yourUrl, {
-      method: 'GET',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+  parseResults();
+
+  const fetchResults = async () => {
+    const response = await fetch('https://copa22.medeiro.tech/matches');
+    const data = await response.json();
+    setResults(data);
   };
 
   useEffect(() => {
-    fetchPositions();
+    fetchResults();
   }, []);
 
   return <div className='App'></div>;
