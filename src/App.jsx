@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   const [results, setResults] = useState([]);
-  const [positions, setPositions] = useState([]);
+  const [standings, setStandings] = useState([]);
 
   const parseResults = () => {
     results.map((match) => {
@@ -25,7 +25,7 @@ function App() {
     const data = await response.json();
     setResults(data);
   };
-  const fetchPositions = async () => {
+  const fetchStandings = async () => {
     const response = await fetch('https://pnkwnu.deta.dev/prode/standings');
     const data = await response.json();
     console.log(data);
@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    fetchPositions();
+    fetchStandings();
   }, []);
 
   return <div className='App'></div>;
