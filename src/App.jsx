@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
 import useFetch from './hooks/useFetch';
 import './App.css';
+//Bootstrap
 import ThemeProvider from 'react-bootstrap/ThemeProvider';
-import StandingsTable from './components/StandingsTable';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+//Components
+import StandingsTable from './components/StandingsTable';
+import Matches from './components/Matches';
 
 function App() {
   // const [results, setResults] = useState([]);
@@ -46,26 +49,60 @@ function App() {
   // }, []);
 
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
+  const [standings, setStandings] = useState([]);
+  const [todayMatches, setTodayMatches] = useState([]);
   const [error, setError] = useState(null);
 
-  const fetchData = async (url) => {
+  const fetchStandings = async (url) => {
     const response = await fetch(url);
     const info = await response.json();
-    setData(info);
+    setStandings(info);
   };
+  const fetchTodayMatches = async (url) => {
+    const response = await fetch(url);
+    const info = await response.json();
+    setTodayMatches(info);
+  };
+
+  const parseTodayMatches = () => {
+    //scheduled, in_progress, completed
+
+    todayMatches.map((match) => {
+      const homeTeam = match.homeTeam.name;
+      const awayTeam = match.awayTeam.name;
+      let homeTeamGoals = match.homeTeam.goals;
+      let awayTeamGoals = match.awayTeam.goals;
+
+      if (match.status === 'scheduled') {
+        homeTeamGoals = '-';
+        awayTeamGoals = '-';
+      }
+    });
+  };
+  parseTodayMatches();
 
   useEffect(() => {
     try {
       setLoading(true);
-      fetchData('https://pnkwnu.deta.dev/prode/standings');
+      fetchStandings('https://pnkwnu.deta.dev/prode/standings');
     } catch (error) {
       setError(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
   }, []);
-  console.log({ loading, data, error });
+  useEffect(() => {
+    try {
+      setLoading(true);
+      fetchTodayMatches('https://copa22.medeiro.tech/matches/today');
+    } catch (error) {
+      setError(error);
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -75,7 +112,12 @@ function App() {
         <Container>
           <Row>
             <Col>
-              <StandingsTable data={data} />
+              <Matches todayMatches={todayMatches} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <StandingsTable data={standings} />
             </Col>
           </Row>
         </Container>

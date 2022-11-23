@@ -5,7 +5,8 @@ function TableBody({ data }) {
   return (
     <tbody>
       {data.map((p) => {
-        <Player key={p.id} data={{ ...p }} />;
+        // console.log(p);
+        return <Player key={p.name} data={p} />;
       })}
     </tbody>
   );
