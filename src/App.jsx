@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 //Components
 import StandingsTable from './components/StandingsTable';
 import Matches from './components/Matches';
+import Header from './components/Header';
 
 function App() {
   // const [results, setResults] = useState([]);
@@ -48,7 +49,8 @@ function App() {
   //   fetchStandings();
   // }, []);
 
-  const [loading, setLoading] = useState(false);
+  const [loadingStandings, setLoadingStandings] = useState(true);
+  const [loadingMatches, setLoadingMatches] = useState(true);
   const [standings, setStandings] = useState([]);
   const [todayMatches, setTodayMatches] = useState([]);
   const [error, setError] = useState(null);
@@ -83,26 +85,26 @@ function App() {
 
   useEffect(() => {
     try {
-      setLoading(true);
       fetchStandings('https://pnkwnu.deta.dev/prode/standings');
     } catch (error) {
       setError(error);
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoadingStandings(false);
     }
   }, []);
   useEffect(() => {
     try {
-      setLoading(true);
+      setLoadingMatches(true);
       fetchTodayMatches('https://copa22.medeiro.tech/matches/today');
     } catch (error) {
       setError(error);
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoadingMatches(false);
     }
   }, []);
+  console.log(loadingStandings);
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -112,12 +114,19 @@ function App() {
         <Container>
           <Row>
             <Col>
-              <Matches todayMatches={todayMatches} />
+              <Header />
             </Col>
           </Row>
           <Row>
+            <Col>{/* <Matches todayMatches={todayMatches} /> */}</Col>
+          </Row>
+          <Row>
             <Col>
-              <StandingsTable data={standings} />
+              {loadingStandings ? (
+                <h1>Loading</h1>
+              ) : (
+                <StandingsTable data={standings} />
+              )}
             </Col>
           </Row>
         </Container>

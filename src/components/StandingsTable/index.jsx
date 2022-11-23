@@ -4,10 +4,13 @@ import TableHead from './TableHead';
 
 function standingsTable({ data }) {
   return (
-    <Table striped bordered hover responsive>
-      <TableHead />
-      <TableBody data={data} />
-    </Table>
+    <>
+      <h2>Tabla de posiciones</h2>
+      <Table striped bordered hover responsive>
+        <TableHead />
+        <TableBody data={data} />
+      </Table>
+    </>
   );
 }
 

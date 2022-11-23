@@ -6,7 +6,7 @@ function TableHead() {
         <th>Nombre</th>
         <th>Puntos</th>
         <th>Acertados</th>
-        <th>Resultado exácto</th>
+        <th>Resultado exacto</th>
         {/* <th>Sospecha de corrupción</th> */}
       </tr>
     </thead>
