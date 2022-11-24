@@ -13,8 +13,12 @@ function Forecast(player) {
       );
     }
   }, []);
-  console.log({ forecast });
-  return <div>Forecast</div>;
+  // console.log(Object.keys(forecast));
+  return (
+    <>
+      <ul></ul>
+    </>
+  );
 }
 
 export default Forecast;

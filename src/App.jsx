@@ -10,7 +10,6 @@ import Matches from './components/Matches';
 import Header from './components/Header';
 import Forecasts from './components/Forecasts';
 //helpers
-import { fetchData } from './services/fetchData.js';
 
 function App() {
   const [loadingStandings, setLoadingStandings] = useState(true);
@@ -18,7 +17,6 @@ function App() {
   const [standings, setStandings] = useState([]);
   // const [todayMatches, setTodayMatches] = useState([]);
   const [error, setError] = useState(null);
-  const [personalData, setPersonalData] = useState([]);
 
   const fetchStandings = async (url) => {
     const response = await fetch(url);
@@ -75,12 +73,6 @@ function App() {
   //   }
   // }, []);
 
-  useEffect(() => {
-    fetchData('https://pnkwnu.deta.dev/prode/player/Sofia').then((r) =>
-      setPersonalData(r)
-    );
-  }, []);
-  console.log({ personalData });
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}

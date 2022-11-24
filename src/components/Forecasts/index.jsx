@@ -11,7 +11,6 @@ function Forecasts() {
       setPlayers(r);
     });
   }, []);
-  console.log({ players });
 
   https: return (
     <Tab.Container id='left-tabs-example' defaultActiveKey='first'>
