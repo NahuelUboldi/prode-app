@@ -1,10 +1,12 @@
 import TodayMatches from './TodayMatches';
+import { Col, Row } from 'react-bootstrap';
 function Matches(todayMatches) {
-  console.log(todayMatches);
   return (
-    <>
-      <TodayMatches data={todayMatches} />
-    </>
+    <Row>
+      <Col>
+        <TodayMatches data={todayMatches} />
+      </Col>
+    </Row>
   );
 }
 

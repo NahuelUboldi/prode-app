@@ -12,43 +12,6 @@ import Matches from './components/Matches';
 import Header from './components/Header';
 
 function App() {
-  // const [results, setResults] = useState([]);
-  // const [standings, setStandings] = useState([]);
-
-  // const parseResults = () => {
-  //   results.map((match) => {
-  //     if (match.status === 'completed') {
-  //       const homeTeam = match.homeTeam.name;
-  //       const homeTeamGoals = match.homeTeam.goals;
-  //       const awayTeam = match.awayTeam.name;
-  //       const awayTeamGoals = match.awayTeam.goals;
-
-  //       console.log(homeTeam, homeTeamGoals, awayTeamGoals, awayTeam);
-  //     }
-  //   });
-  // };
-
-  // parseResults();
-
-  // const fetchResults = async () => {
-  //   const response = await fetch('https://copa22.medeiro.tech/matches');
-  //   const data = await response.json();
-  //   setResults(data);
-  // };
-  // const fetchStandings = async () => {
-  //   const response = await fetch('https://pnkwnu.deta.dev/prode/standings');
-  //   const data = await response.json();
-  //   console.log(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchResults();
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchStandings();
-  // }, []);
-
   const [loadingStandings, setLoadingStandings] = useState(true);
   const [loadingMatches, setLoadingMatches] = useState(true);
   const [standings, setStandings] = useState([]);
@@ -116,23 +79,9 @@ function App() {
     >
       <div className='App'>
         <Container>
-          <Row>
-            <Col>
-              <Header />
-            </Col>
-          </Row>
-          <Row>
-            <Col>{/* <Matches todayMatches={todayMatches} /> */}</Col>
-          </Row>
-          <Row>
-            <Col>
-              {loadingStandings ? (
-                <h1>Loading</h1>
-              ) : (
-                <StandingsTable data={standings} />
-              )}
-            </Col>
-          </Row>
+          <Header />
+          {/* <Matches todayMatches={todayMatches} /> */}
+          <StandingsTable data={standings} />
         </Container>
       </div>
     </ThemeProvider>
