@@ -52,7 +52,7 @@ function App() {
   const [loadingStandings, setLoadingStandings] = useState(true);
   const [loadingMatches, setLoadingMatches] = useState(true);
   const [standings, setStandings] = useState([]);
-  const [todayMatches, setTodayMatches] = useState([]);
+  // const [todayMatches, setTodayMatches] = useState([]);
   const [error, setError] = useState(null);
 
   const fetchStandings = async (url) => {
@@ -60,32 +60,37 @@ function App() {
     const info = await response.json();
     setStandings(info);
   };
-  const fetchTodayMatches = async (url) => {
-    const response = await fetch(url);
-    const info = await response.json();
-    setTodayMatches(info);
-  };
+  // const fetchTodayMatches = async (url) => {
+  //   const response = await fetch(url);
+  //   const info = await response.json();
+  //   setTodayMatches(info);
+  // };
 
-  const parseTodayMatches = () => {
-    //scheduled, in_progress, completed
+  // const parseTodayMatches = () => {
+  //   //scheduled, in_progress, completed
 
-    todayMatches.map((match) => {
-      const homeTeam = match.homeTeam.name;
-      const awayTeam = match.awayTeam.name;
-      let homeTeamGoals = match.homeTeam.goals;
-      let awayTeamGoals = match.awayTeam.goals;
+  //   todayMatches.map((match) => {
+  //     const homeTeam = match.homeTeam.name;
+  //     const awayTeam = match.awayTeam.name;
+  //     let homeTeamGoals = match.homeTeam.goals;
+  //     let awayTeamGoals = match.awayTeam.goals;
 
-      if (match.status === 'scheduled') {
-        homeTeamGoals = '-';
-        awayTeamGoals = '-';
-      }
-    });
-  };
-  parseTodayMatches();
+  //     if (match.status === 'scheduled') {
+  //       homeTeamGoals = '-';
+  //       awayTeamGoals = '-';
+  //     }
+  //   });
+  // };
+  // parseTodayMatches();
 
   useEffect(() => {
     try {
-      fetchStandings('https://pnkwnu.deta.dev/prode/standings');
+      fetchStandings('https://pnkwnu.deta.dev/prode/standings', {
+        mode: 'no-cors',
+        header: {
+          'Access-Control-Allow-Origin': '*',
+        },
+      });
     } catch (error) {
       setError(error);
       console.log(error);
@@ -93,18 +98,17 @@ function App() {
       setLoadingStandings(false);
     }
   }, []);
-  useEffect(() => {
-    try {
-      setLoadingMatches(true);
-      fetchTodayMatches('https://copa22.medeiro.tech/matches/today');
-    } catch (error) {
-      setError(error);
-      console.log(error);
-    } finally {
-      setLoadingMatches(false);
-    }
-  }, []);
-  console.log(loadingStandings);
+  // useEffect(() => {
+  //   try {
+  //     setLoadingMatches(true);
+  //     fetchTodayMatches('https://copa22.medeiro.tech/matches/today');
+  //   } catch (error) {
+  //     setError(error);
+  //     console.log(error);
+  //   } finally {
+  //     setLoadingMatches(false);
+  //   }
+  // }, []);
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
