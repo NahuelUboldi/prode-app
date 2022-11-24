@@ -4,12 +4,13 @@ import './App.css';
 //Bootstrap
 import ThemeProvider from 'react-bootstrap/ThemeProvider';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 //Components
 import StandingsTable from './components/StandingsTable';
 import Matches from './components/Matches';
 import Header from './components/Header';
+import Forecasts from './components/Forecasts';
+//helpers
+import { fetchData } from './services/fetchData.js';
 
 function App() {
   const [loadingStandings, setLoadingStandings] = useState(true);
@@ -17,6 +18,7 @@ function App() {
   const [standings, setStandings] = useState([]);
   // const [todayMatches, setTodayMatches] = useState([]);
   const [error, setError] = useState(null);
+  const [personalData, setPersonalData] = useState([]);
 
   const fetchStandings = async (url) => {
     const response = await fetch(url);
@@ -72,6 +74,13 @@ function App() {
   //     setLoadingMatches(false);
   //   }
   // }, []);
+
+  useEffect(() => {
+    fetchData('https://pnkwnu.deta.dev/prode/player/Sofia').then((r) =>
+      setPersonalData(r)
+    );
+  }, []);
+  console.log({ personalData });
   return (
     <ThemeProvider
       breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
@@ -79,9 +88,10 @@ function App() {
     >
       <div className='App'>
         <Container>
-          <Header />
+          {/* <Header /> */}
           {/* <Matches todayMatches={todayMatches} /> */}
           <StandingsTable data={standings} />
+          <Forecasts />
         </Container>
       </div>
     </ThemeProvider>
