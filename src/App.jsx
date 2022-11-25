@@ -12,17 +12,8 @@ import Forecasts from './components/Forecasts';
 //helpers
 
 function App() {
-  const [loadingStandings, setLoadingStandings] = useState(true);
-  const [loadingMatches, setLoadingMatches] = useState(true);
-  const [standings, setStandings] = useState([]);
   // const [todayMatches, setTodayMatches] = useState([]);
-  const [error, setError] = useState(null);
 
-  const fetchStandings = async (url) => {
-    const response = await fetch(url);
-    const info = await response.json();
-    setStandings(info);
-  };
   // const fetchTodayMatches = async (url) => {
   //   const response = await fetch(url);
   //   const info = await response.json();
@@ -46,21 +37,6 @@ function App() {
   // };
   // parseTodayMatches();
 
-  useEffect(() => {
-    try {
-      fetchStandings('https://pnkwnu.deta.dev/prode/standings', {
-        mode: 'no-cors',
-        header: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
-    } catch (error) {
-      setError(error);
-      console.log(error);
-    } finally {
-      setLoadingStandings(false);
-    }
-  }, []);
   // useEffect(() => {
   //   try {
   //     setLoadingMatches(true);
@@ -82,7 +58,8 @@ function App() {
         <Container>
           {/* <Header /> */}
           {/* <Matches todayMatches={todayMatches} /> */}
-          <StandingsTable data={standings} />
+          <StandingsTable />
+
           <Forecasts />
         </Container>
       </div>

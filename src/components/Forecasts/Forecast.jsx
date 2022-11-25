@@ -1,22 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import { fetchData } from '../../services/fetchData';
+import { ListGroup } from 'react-bootstrap';
 
-function Forecast(player) {
+function Forecast(data) {
   const [forecast, setForecast] = useState([]);
-  console.log(player.player);
+  const GROUP_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+
   useEffect(() => {
-    if (player) {
-      fetchData(`https://pnkwnu.deta.dev/prode/player/${player.player}`).then(
-        (r) => {
-          setForecast(r);
-        }
-      );
+    if (data.player) {
+      fetch(`https://pnkwnu.deta.dev/prode/player/${data.player}`)
+        .then((r) => r.json())
+        .then((r) => {
+          setForecast(r.forecasts);
+        });
     }
   }, []);
-  // console.log(Object.keys(forecast));
+
   return (
     <>
-      <ul></ul>
+      {forecast[1] ? (
+        <>
+          {GROUP_LIST.map((group) => {
+            return (
+              <ListGroup key={group}>
+                <ListGroup.Item
+                  variant='primary'
+                  className='text-center fw-bolder'
+                >
+                  Grupo {group}
+                </ListGroup.Item>
+                {Object.keys(forecast)
+                  .filter((k) => {
+                    return forecast[k].group === group;
+                  })
+                  .map((k) => {
+                    return (
+                      <ListGroup.Item
+                        key={forecast[k].id}
+                        className='text-center'
+                      >
+                        {forecast[k].local}{' '}
+                        <strong>{forecast[k].local_score}</strong> -{' '}
+                        {forecast[k].visit}{' '}
+                        <strong>{forecast[k].visit_score}</strong>
+                      </ListGroup.Item>
+                    );
+                  })}
+              </ListGroup>
+            );
+          })}
+        </>
+      ) : (
+        <p>Loading...</p>
+      )}
     </>
   );
 }
