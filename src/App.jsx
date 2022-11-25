@@ -56,7 +56,7 @@ function App() {
     >
       <div className='App'>
         <Container>
-          {/* <Header /> */}
+          <Header />
           {/* <Matches todayMatches={todayMatches} /> */}
           <StandingsTable />
 

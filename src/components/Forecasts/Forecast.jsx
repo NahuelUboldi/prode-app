@@ -40,8 +40,8 @@ function Forecast(data) {
                       >
                         {forecast[k].local}{' '}
                         <strong>{forecast[k].local_score}</strong> -{' '}
+                        <strong>{forecast[k].visit_score}</strong>{' '}
                         {forecast[k].visit}{' '}
-                        <strong>{forecast[k].visit_score}</strong>
                       </ListGroup.Item>
                     );
                   })}

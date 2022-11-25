@@ -26,11 +26,11 @@ function standingsTable({ data }) {
       console.log(error);
     }
   }, []);
-
+  console.log(standings);
   return (
     <Row>
       <Col>
-        <h2>Tabla de posiciones</h2>
+        <h2 className='section-title'>Tabla de posiciones</h2>
         {standings.length ? (
           <Table striped bordered hover responsive>
             <TableHead />
