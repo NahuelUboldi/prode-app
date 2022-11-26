@@ -1,8 +1,9 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
-function LoadingStatus() {
+function LoadingStatus({ fetchStandings }) {
   return (
-    <div>
+    <div className='text-center'>
       <h2 className='text-center'>Algo salió mal... ups</h2>
       <p className='text-center'>
         Te recomendaría que vuelvas a cargar la página
@@ -17,6 +18,17 @@ function LoadingStatus() {
           allowFullScreen
         ></iframe>
       </div>
+      {fetchStandings && (
+        <Button
+          variant='primary'
+          className='reload-btn'
+          onClick={() =>
+            fetchStandings('https://pnkwnu.deta.dev/prode/standings')
+          }
+        >
+          Recargar tabla
+        </Button>
+      )}
     </div>
   );
 }

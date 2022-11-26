@@ -17,9 +17,7 @@ function standingsTable({ data }) {
 
   useEffect(() => {
     try {
-      fetch('https://pnkwnu.deta.dev/prode/standings')
-        .then((r) => r.json())
-        .then((r) => setStandings(r));
+      fetchStandings('https://pnkwnu.deta.dev/prode/standings');
     } catch (error) {
       console.log('Ha habido un error: ', error);
     }
@@ -37,7 +35,10 @@ function standingsTable({ data }) {
             <TableBody data={standings} />
           </Table>
         ) : (
-          <Loading status={standings.error ? 'broken' : 'loading'} />
+          <Loading
+            status={standings.error ? 'broken' : 'loading'}
+            fetchStandings={fetchStandings}
+          />
         )}
       </Col>
     </Row>
