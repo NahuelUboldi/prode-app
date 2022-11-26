@@ -4,7 +4,7 @@ import LoadingStatus from '../Loading/LoadingStatus';
 
 function Forecast(data) {
   const [forecast, setForecast] = useState([]);
-  const GROUP_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+  const GROUP_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
   useEffect(() => {
     if (data.player) {
