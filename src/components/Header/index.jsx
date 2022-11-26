@@ -7,7 +7,7 @@ function Header() {
   return (
     <Row>
       <Col>
-        <header className='pepe-header'>
+        <header className='pepe-header mt-5'>
           <h1>Prode Pepillos 2022</h1>
         </header>
       </Col>

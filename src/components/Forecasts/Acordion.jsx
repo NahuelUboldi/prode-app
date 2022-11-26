@@ -9,7 +9,7 @@ function Acordion({ players, activePlayer, setActivePlayer }) {
           <Accordion.Item eventKey={i} key={p}>
             <Accordion.Header>{p}</Accordion.Header>
             <Accordion.Body>
-              <Forecast player={activePlayer || players[0]} />
+              <Forecast player={activePlayer || p} />
             </Accordion.Body>
           </Accordion.Item>
         );

@@ -15,18 +15,14 @@ function standingsTable({ data }) {
 
   useEffect(() => {
     try {
-      fetchStandings('https://pnkwnu.deta.dev/prode/standings', {
-        mode: 'no-cors',
-        header: {
-          'Access-Control-Allow-Origin': '*',
-        },
-      });
+      fetch('https://pnkwnu.deta.dev/prode/standings')
+        .then((r) => r.json())
+        .then((r) => setStandings(r));
     } catch (error) {
-      setError(error);
-      console.log(error);
+      console.log('Ha habido un error: ', error);
     }
   }, []);
-  console.log(standings);
+  console.log('standings: ', standings);
   return (
     <Row>
       <Col>

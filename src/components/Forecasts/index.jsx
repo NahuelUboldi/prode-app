@@ -13,23 +13,25 @@ function Forecasts() {
     });
   }, []);
 
+  console.log('activePlayer: ', activePlayer);
+
   return (
-    <>
+    <div className='mb-5'>
       <h2 className='section-title'>
         Pronosticos individuales de cada participante
       </h2>
       <p>Hacé click en el participante que quieras consultar.</p>
-      <Acordion
-        players={players}
-        activePlayer={activePlayer}
-        setActivePlayer={setActivePlayer}
-      />
-      {/* <Tabs
+      {/* <Acordion
         players={players}
         activePlayer={activePlayer}
         setActivePlayer={setActivePlayer}
       /> */}
-    </>
+      <Tabs
+        players={players}
+        activePlayer={activePlayer}
+        setActivePlayer={setActivePlayer}
+      />
+    </div>
   );
 }
 

@@ -4,9 +4,9 @@ import Forecast from './Forecast';
 function Tabs({ players, activePlayer, setActivePlayer }) {
   return (
     <Tab.Container id='left-tabs-example' defaultActiveKey='first'>
-      <Row>
-        <Col sm={2}>
-          <Nav variant='pills' className='flex-column'>
+      <Row className='mb-3'>
+        <Col sm={12}>
+          <Nav variant='pills' className='flex-row'>
             {players.map((p) => {
               return (
                 <Nav.Item key={p}>
@@ -18,7 +18,9 @@ function Tabs({ players, activePlayer, setActivePlayer }) {
             })}
           </Nav>
         </Col>
-        <Col sm={10}>
+      </Row>
+      <Row>
+        <Col sm={12}>
           <Tab.Content key={activePlayer || players[0]}>
             <Tab.Pane eventKey={activePlayer || players[0]}>
               <Forecast player={activePlayer || players[0]} />

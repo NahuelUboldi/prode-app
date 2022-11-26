@@ -15,6 +15,7 @@ function Forecast(data) {
     }
   }, []);
 
+  console.log(data);
   return (
     <>
       {forecast[1] ? (
