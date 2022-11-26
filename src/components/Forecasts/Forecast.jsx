@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ListGroup } from 'react-bootstrap';
+import LoadingStatus from '../Loading/LoadingStatus';
 
 function Forecast(data) {
   const [forecast, setForecast] = useState([]);
@@ -51,7 +52,9 @@ function Forecast(data) {
           })}
         </>
       ) : (
-        <p>Loading...</p>
+        <div className='w-100 d-flex justify-content-center'>
+          <LoadingStatus status='loading' />
+        </div>
       )}
     </>
   );

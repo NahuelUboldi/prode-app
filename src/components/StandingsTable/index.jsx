@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import TableBody from './TableBody';
 import TableHead from './TableHead';
+import Loading from '../Loading';
+
 import { Col, Row } from 'react-bootstrap';
 
 function standingsTable({ data }) {
@@ -23,6 +25,8 @@ function standingsTable({ data }) {
     }
   }, []);
   console.log('standings: ', standings);
+  console.log('standings-error: ', standings.error);
+
   return (
     <Row>
       <Col>
@@ -33,7 +37,7 @@ function standingsTable({ data }) {
             <TableBody data={standings} />
           </Table>
         ) : (
-          <p>Loading...</p>
+          <Loading status={standings.error ? 'broken' : 'loading'} />
         )}
       </Col>
     </Row>
